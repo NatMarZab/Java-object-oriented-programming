@@ -14,7 +14,6 @@ public class Tree {
         this.treeType = treeType;
     }
 
-    //Getters and setters.
     // 1) Getters:
     public double getHeightFt() {
         return heightFt;
@@ -25,7 +24,8 @@ public class Tree {
     public TreeType getTreeType() {
         return treeType;
     }
-    // Setters:
+
+    // 2) Setters:
     public void setTrunkDiameterInches(double trunkDiameterInches) {
         this.trunkDiameterInches = trunkDiameterInches;
     }
@@ -33,6 +33,7 @@ public class Tree {
         this.heightFt = heightFt;
     }
     //There is no way to modify the treetype once the tree is created. So, no setter for it.
+
     public void grow() {
         this.heightFt = this.heightFt + 10;
         this.trunkDiameterInches = this.trunkDiameterInches + 1;
@@ -41,6 +42,7 @@ public class Tree {
     static void announceTree() {
         System.out.println("Look out for that " + TRUNK_COLOR + " tree!");
     }
+
     //instance methods:
     void announceTallTree() {
         if(this.heightFt > 100) {
