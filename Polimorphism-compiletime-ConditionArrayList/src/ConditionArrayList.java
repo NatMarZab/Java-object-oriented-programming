@@ -7,19 +7,32 @@ import java.util.stream.Collectors;
 
 public class ConditionArrayList extends ArrayList<Integer> {
 
-    // we need to add the condition to the costructor. In this case is a Predicate, that takes in a value and returns a boolean.
-    // and we want access the condition from different instance methods, for what we keep it in an instance variable:
-    private Predicate<Integer> condition;
-    public ConditionArrayList(Predicate<Integer> predicate, Integer... nums) {
+    //We can overload the constructor to create or manipulate in multiple ways an object depending on the type of inputs and number of parameters.
 
+    private Predicate<Integer> condition;
+   /* public ConditionArrayList(Predicate<Integer> predicate, Integer... nums) {
         super(Arrays.stream(nums).filter(predicate).collect(Collectors.toList()));
         this.condition = predicate;
     }
 
-    // We will need to override some ArrayList functionality in order to only odd numbers are added.
-    // Override function implementations: match the method signatures from the ArraList exactly.
+    public ConditionArrayList(Predicate<Integer> predicate, ArrayList<Integer> arrayList) {
+        super(arrayList.stream().filter(predicate).collect(Collectors.toList()));
+        this.condition = predicate;
+    } */
 
-    //The implementation of the following method lives in ArrayList, here we only override it. We access that implmentation in ArrayList through "super" keyword.
+//And we can make a call the other constructor from within the first.
+
+    public ConditionArrayList(Predicate<Integer> predicate, Integer... nums) {
+        //From here, we can have the other constructor, so that we use the functionality of List class by calling it directly
+        super(new ConditionArrayList(predicate, Arrays.asList(nums)));
+    }
+
+    public ConditionArrayList(Predicate<Integer> predicate, List<Integer> arrayList) {
+        super(arrayList.stream().filter(predicate).collect(Collectors.toList()));
+        this.condition = predicate;
+    }
+
+
     @Override
     public void add(int index, Integer element) {
         if (isEligible(element)) {
@@ -75,4 +88,3 @@ public class ConditionArrayList extends ArrayList<Integer> {
     }
 
 }
-
